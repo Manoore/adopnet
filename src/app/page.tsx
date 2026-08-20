@@ -6,6 +6,7 @@ import { FadeIn } from "@/components/fade-in";
 import { Stagger, StaggerItem } from "@/components/stagger";
 import { HoverLift } from "@/components/hover-lift";
 import { Hero } from "@/components/hero";
+import { Showcase } from "@/components/showcase";
 import { IconBadge } from "@/components/icon-badge";
 import { services } from "@/lib/services";
 import { packages } from "@/lib/packages";
@@ -14,6 +15,8 @@ export default function Home() {
   return (
     <>
       <Hero />
+
+      <Showcase />
 
       {/* Service pillars */}
       <section className="border-t border-line">
