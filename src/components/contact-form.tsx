@@ -38,6 +38,20 @@ export function ContactForm() {
       .filter(Boolean)
       .join("\n");
 
+    fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        email,
+        company: company || undefined,
+        message,
+        packageSlug: matchedPackage?.slug,
+      }),
+    }).catch(() => {
+      // Best-effort persistence — the mailto fallback below is the source of truth either way.
+    });
+
     window.location.href = `mailto:${siteConfig.email}?subject=${encodeURIComponent(
       subject,
     )}&body=${encodeURIComponent(body)}`;
