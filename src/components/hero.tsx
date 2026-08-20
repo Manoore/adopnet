@@ -9,7 +9,6 @@ import { FadeIn } from "@/components/fade-in";
 import { Stagger, StaggerItem } from "@/components/stagger";
 import { HeroHeadline } from "@/components/hero-headline";
 import { Magnetic } from "@/components/magnetic";
-import { HeroVisual } from "@/components/hero-visual";
 import { siteConfig } from "@/lib/site-config";
 
 const trustPoints = [
@@ -54,43 +53,35 @@ export function Hero() {
         style={{ y: glowY, opacity: glowOpacity }}
       />
       <Container className="relative pt-24 pb-20 sm:pt-32 sm:pb-28">
-        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-[1.1fr_0.9fr]">
-          <div>
-            <FadeIn>
-              <div className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-1.5 text-xs text-paper-dim">
-                <Sparkles size={14} className="text-signal" />
-                Built for US companies moving fast on AI
-              </div>
-            </FadeIn>
-
-            <HeroHeadline
-              text="Marketing, AI, and product — built by one studio."
-              className="mt-8 max-w-3xl text-balance font-display text-5xl font-semibold leading-[1.05] tracking-tight text-paper sm:text-6xl lg:text-7xl"
-            />
-
-            <FadeIn delay={0.5}>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-paper-dim">
-                {siteConfig.description}
-              </p>
-            </FadeIn>
-            <FadeIn delay={0.6}>
-              <div className="mt-10 flex flex-wrap items-center gap-4">
-                <Magnetic>
-                  <Button href="/packages" size="lg">
-                    See packages <ArrowRight size={16} />
-                  </Button>
-                </Magnetic>
-                <Button href="/contact" variant="secondary" size="lg">
-                  Talk to us
-                </Button>
-              </div>
-            </FadeIn>
+        <FadeIn>
+          <div className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-1.5 text-xs text-paper-dim">
+            <Sparkles size={14} className="text-signal" />
+            Built for US companies moving fast on AI
           </div>
+        </FadeIn>
 
-          <FadeIn delay={0.3} className="hidden lg:block">
-            <HeroVisual />
-          </FadeIn>
-        </div>
+        <HeroHeadline
+          text="Marketing, AI, and product — built by one studio."
+          className="mt-8 max-w-3xl text-balance font-display text-5xl font-semibold leading-[1.05] tracking-tight text-paper sm:text-6xl lg:text-7xl"
+        />
+
+        <FadeIn delay={0.5}>
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-paper-dim">
+            {siteConfig.description}
+          </p>
+        </FadeIn>
+        <FadeIn delay={0.6}>
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <Magnetic>
+              <Button href="/packages" size="lg">
+                See packages <ArrowRight size={16} />
+              </Button>
+            </Magnetic>
+            <Button href="/contact" variant="secondary" size="lg">
+              Talk to us
+            </Button>
+          </div>
+        </FadeIn>
 
         <Stagger className="mt-16 grid grid-cols-1 divide-y divide-line rounded-2xl border border-line sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
           {trustPoints.map((point) => (
