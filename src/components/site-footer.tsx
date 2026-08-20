@@ -2,6 +2,7 @@ import Link from "next/link";
 import { siteConfig } from "@/lib/site-config";
 import { services } from "@/lib/services";
 import { Container } from "@/components/ui/container";
+import { Logo } from "@/components/logo";
 
 export function SiteFooter() {
   return (
@@ -9,7 +10,11 @@ export function SiteFooter() {
       <Container className="py-16">
         <div className="grid grid-cols-2 gap-10 md:grid-cols-5">
           <div className="col-span-2">
-            <Link href="/" className="font-display text-lg font-semibold tracking-tight text-paper">
+            <Link
+              href="/"
+              className="flex items-center gap-2.5 font-display text-lg font-semibold tracking-tight text-paper"
+            >
+              <Logo />
               {siteConfig.name}
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-paper-dim">

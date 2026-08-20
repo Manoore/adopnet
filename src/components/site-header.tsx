@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/logo";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -16,9 +17,10 @@ export function SiteHeader() {
         <div className="flex h-20 items-center justify-between py-4">
           <Link
             href="/"
-            className="font-display text-lg font-semibold tracking-tight text-paper"
+            className="flex items-center gap-2.5 font-display text-lg font-semibold tracking-tight text-paper"
             onClick={() => setOpen(false)}
           >
+            <Logo />
             {siteConfig.name}
           </Link>
 
