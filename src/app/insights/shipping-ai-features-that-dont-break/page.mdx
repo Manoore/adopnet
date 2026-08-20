@@ -1,0 +1,40 @@
+import { Container } from "@/components/ui/container";
+import { getPostBySlug } from "@/lib/posts";
+
+export const metadata = {
+  title: "Shipping AI features that don't break in production",
+  description:
+    "Demos are easy. Reliable AI features that survive real users, edge cases, and cost constraints are a different discipline.",
+};
+
+<Container className="py-24">
+<div className="max-w-2xl">
+<div className="text-xs text-paper-dim">
+  {new Date(getPostBySlug("shipping-ai-features-that-dont-break").date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+  {" · "}
+  {getPostBySlug("shipping-ai-features-that-dont-break").readTime}
+</div>
+
+# Shipping AI features that don't break in production
+
+Building an AI demo takes an afternoon. Building an AI feature that holds up against real users, adversarial inputs, and a production budget takes considerably longer — and the gap between the two is where most "AI initiatives" quietly stall.
+
+## Where demos fall apart
+
+A demo is scripted. You know the inputs, so it's easy to make the output look impressive. Production is not scripted. Real users type things you didn't anticipate, in languages you didn't test, with intent that doesn't match your happy path.
+
+The features that survive that transition share a few traits:
+
+- **Explicit guardrails.** The system knows what it should refuse to do, not just what it should do.
+- **Graceful degradation.** When the model is uncertain, the feature says so — it doesn't confidently hallucinate an answer.
+- **Cost boundaries.** Every AI call has a budget. Without one, a single automated retry loop can turn a $200 monthly bill into a $20,000 one.
+- **Evaluation before launch, not after.** A test set of real (or realistic) inputs, scored before the feature reaches users — not discovered via support tickets.
+
+## The unglamorous 80%
+
+The interesting part of an AI feature — the prompt, the model choice — is usually 20% of the actual engineering effort. The other 80% is logging, rate limiting, fallback behavior, and monitoring that tells you when the feature starts behaving strangely, before your users notice.
+
+If an AI feature in your roadmap doesn't have a plan for that 80%, it's not ready to ship — it's still a demo.
+
+</div>
+</Container>

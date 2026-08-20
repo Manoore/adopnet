@@ -1,0 +1,19 @@
+# Adopnet
+
+> Adopnet is a US-based digital studio providing digital marketing, AI solutions,
+> web development, mobile app development (iOS and Android), digital transformation
+> consulting, and fractional advisory services.
+
+## Services
+- Digital Marketing: /services/digital-marketing
+- AI Solutions: /services/ai-solutions
+- Web Development: /services/web-development
+- Mobile Apps: /services/mobile-apps
+- Digital Transformation: /services/digital-transformation
+- Consulting: /services/consulting
+
+## Packages
+Fixed-scope, priced packages: /packages
+
+## Contact
+/contact

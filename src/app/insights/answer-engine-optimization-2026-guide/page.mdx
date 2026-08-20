@@ -1,0 +1,43 @@
+import { Container } from "@/components/ui/container";
+import { getPostBySlug } from "@/lib/posts";
+
+export const metadata = {
+  title: "Answer-engine optimization: the 2026 guide for US businesses",
+  description:
+    "Search is no longer just Google's ten blue links. Here's how to structure content so AI answer engines cite your business.",
+};
+
+<Container className="py-24">
+<div className="max-w-2xl">
+<div className="text-xs text-paper-dim">
+  {new Date(getPostBySlug("answer-engine-optimization-2026-guide").date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+  {" · "}
+  {getPostBySlug("answer-engine-optimization-2026-guide").readTime}
+</div>
+
+# Answer-engine optimization: the 2026 guide for US businesses
+
+A growing share of the research that used to happen in a Google search box now happens inside an AI assistant. That shift changes what "ranking well" means — and most SEO playbooks haven't caught up.
+
+## SEO and AEO are not the same job
+
+Traditional SEO optimizes for a ranked list of links a human scans and clicks. Answer-engine optimization (AEO) optimizes for being the source an AI model pulls from, summarizes, and cites directly — often without the user ever visiting your site.
+
+Both matter. But AEO rewards different things:
+
+- **Direct, extractable answers.** Content structured so a model can lift a clean, accurate statement out of context.
+- **Structured data.** Schema markup that makes your offerings, pricing, and credentials machine-readable, not just human-readable.
+- **Consistency across the web.** Answer engines cross-reference. Conflicting claims about your business across different pages or listings erode trust signals.
+- **A clear `llms.txt`.** An emerging convention that tells AI crawlers what your site is and how to interpret it — cheap to add, still rare enough to be a small edge.
+
+## What to actually do this quarter
+
+1. Audit your top pages for whether a single paragraph, lifted in isolation, would accurately represent your offering.
+2. Add Organization, Service, and Product structured data to every page that describes what you sell.
+3. Publish a simple `llms.txt` at your domain root.
+4. Make sure your pricing, service descriptions, and contact details say the same thing everywhere — your site, directory listings, and social profiles.
+
+None of this requires abandoning traditional SEO. It requires treating AI answer engines as a distinct audience with different requirements, and building for both at once.
+
+</div>
+</Container>

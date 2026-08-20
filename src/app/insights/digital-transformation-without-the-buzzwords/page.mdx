@@ -1,0 +1,46 @@
+import { Container } from "@/components/ui/container";
+import { getPostBySlug } from "@/lib/posts";
+
+export const metadata = {
+  title: "Digital transformation, without the buzzwords",
+  description:
+    "Most transformation projects fail because they start with a platform decision instead of a workflow audit. A practical starting point.",
+};
+
+<Container className="py-24">
+<div className="max-w-2xl">
+<div className="text-xs text-paper-dim">
+  {new Date(getPostBySlug("digital-transformation-without-the-buzzwords").date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+  {" · "}
+  {getPostBySlug("digital-transformation-without-the-buzzwords").readTime}
+</div>
+
+# Digital transformation, without the buzzwords
+
+"Digital transformation" gets used to mean everything from a new CRM to a company-wide AI mandate, which is part of why so many transformation projects stall — nobody agreed on what was actually changing.
+
+## Start with the workflow, not the platform
+
+The common failure pattern: leadership picks a platform first (a new ERP, a new CRM, an AI tool) and then tries to fit existing workflows into it. This almost always costs more and takes longer than expected, because the workflows were never actually mapped — just assumed.
+
+A more reliable starting point is a workflow audit:
+
+1. Pick the three processes costing the most manual hours per week.
+2. Map each one step by step, including every handoff between people and tools.
+3. Identify where data gets re-entered manually because two systems don't talk to each other.
+4. Only then evaluate which tools — existing or new — actually close those gaps.
+
+## Where AI fits, honestly
+
+AI is genuinely useful in transformation work, but usually as an automation layer applied to a workflow you've already mapped and simplified — not as a substitute for doing that mapping. An AI agent bolted onto a broken process automates the breakage faster.
+
+## What a realistic first quarter looks like
+
+- Weeks 1–2: workflow audit across the highest-cost processes.
+- Weeks 3–6: consolidate or integrate the systems creating the worst handoff friction.
+- Weeks 7–12: layer in automation — AI or otherwise — on the now-simplified workflow.
+
+Transformation that starts here tends to compound. Transformation that starts with a platform purchase tends to stall around month four, once the gap between the tool and the real workflow becomes impossible to ignore.
+
+</div>
+</Container>
