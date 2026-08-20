@@ -1,124 +1,108 @@
 "use client";
 
-import { useRef, type MouseEvent } from "react";
-import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { Code2, Smartphone, Sparkles, Megaphone, Bell, TrendingUp } from "lucide-react";
 
-const circuitLines = [
-  "M40,140 L100,140 L100,110",
-  "M40,220 L90,220 L90,260",
-  "M55,90 L95,90",
-  "M120,60 L120,95",
-  "M150,240 L180,240 L180,270",
-  "M60,180 L110,180",
-  "M130,290 L160,290",
+const bars = [45, 70, 35, 85, 55, 95, 40];
+
+const badges = [
+  { icon: Code2, label: "Web", top: "-4%", left: "-8%", delay: 0 },
+  { icon: Smartphone, label: "Mobile", top: "94%", left: "-10%", delay: 0.6 },
+  { icon: Sparkles, label: "AI", top: "-4%", left: "88%", delay: 1.2 },
+  { icon: Megaphone, label: "Marketing", top: "94%", left: "80%", delay: 1.8 },
 ];
-
-const circuitDots = [
-  { cx: 100, cy: 110, r: 3, delay: 0 },
-  { cx: 90, cy: 260, r: 2.5, delay: 0.4 },
-  { cx: 55, cy: 90, r: 2.5, delay: 0.8 },
-  { cx: 120, cy: 60, r: 2.5, delay: 1.2 },
-  { cx: 180, cy: 270, r: 3, delay: 1.6 },
-  { cx: 60, cy: 180, r: 2.5, delay: 2 },
-  { cx: 160, cy: 290, r: 2.5, delay: 0.6 },
-  { cx: 190, cy: 130, r: 2.5, delay: 1 },
-];
-
-const profilePath =
-  "M70,40 Q130,8 180,58 Q197,90 186,120 Q212,142 222,166 Q200,182 188,190 Q196,206 180,216 Q164,236 154,260 L150,300 Q138,322 90,322 L40,322 L34,110 Q34,58 70,40 Z";
 
 export function HeroVisual() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
 
-  const rotateX = useMotionValue(0);
-  const rotateY = useMotionValue(0);
-  const springRotateX = useSpring(rotateX, { stiffness: 150, damping: 20 });
-  const springRotateY = useSpring(rotateY, { stiffness: 150, damping: 20 });
-
-  function handleMouseMove(e: MouseEvent<HTMLDivElement>) {
-    if (reduceMotion || !containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const px = (e.clientX - rect.left) / rect.width - 0.5;
-    const py = (e.clientY - rect.top) / rect.height - 0.5;
-    rotateY.set(px * 22);
-    rotateX.set(py * -22);
-  }
-
-  function handleMouseLeave() {
-    rotateX.set(0);
-    rotateY.set(0);
-  }
-
   return (
-    <div className="relative mx-auto w-full max-w-[420px] py-8" style={{ perspective: "1200px" }}>
+    <div className="relative mx-auto w-full max-w-[460px] py-10">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_60%_45%,_var(--color-accent)_0%,_transparent_60%)] opacity-30 blur-2xl"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--color-accent)_0%,_transparent_65%)] opacity-25 blur-2xl"
       />
 
-      <motion.div
-        ref={containerRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{ rotateX: springRotateX, rotateY: springRotateY, transformStyle: "preserve-3d" }}
-        className="relative"
+      <div
+        className="relative mx-auto w-full max-w-[380px]"
+        style={{ perspective: "1400px" }}
       >
-        <svg viewBox="0 0 260 340" className="mx-auto h-auto w-full max-w-[300px]">
-          <defs>
-            <clipPath id="profileClip">
-              <path d={profilePath} />
-            </clipPath>
-            <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="var(--color-signal)" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="var(--color-signal)" stopOpacity="0" />
-            </radialGradient>
-            <linearGradient id="profileFill" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="var(--color-ink-elevated)" />
-              <stop offset="100%" stopColor="var(--color-ink-soft)" />
-            </linearGradient>
-          </defs>
+        <div
+          className="rounded-xl border border-line bg-ink-elevated p-2 shadow-2xl shadow-black/50"
+          style={{ transform: "rotateX(8deg) rotateY(-10deg)" }}
+        >
+          {/* screen chrome */}
+          <div className="flex items-center gap-1.5 px-2 pb-2">
+            <span className="h-2 w-2 rounded-full bg-paper-dim/30" />
+            <span className="h-2 w-2 rounded-full bg-paper-dim/30" />
+            <span className="h-2 w-2 rounded-full bg-paper-dim/30" />
+          </div>
 
-          {/* profile silhouette */}
-          <path d={profilePath} fill="url(#profileFill)" stroke="var(--color-accent-soft)" strokeWidth="1.5" />
+          {/* screen content */}
+          <div className="space-y-3 rounded-lg bg-ink p-4">
+            <div className="flex items-center justify-between">
+              <span className="h-2 w-16 rounded-full bg-paper/70" />
+              <div className="flex gap-1.5">
+                <span className="h-2 w-2 rounded-full bg-signal" />
+                <Bell size={11} className="text-paper-dim" />
+              </div>
+            </div>
 
-          {/* circuit texture, clipped to the silhouette */}
-          <g clipPath="url(#profileClip)">
-            {circuitLines.map((d, i) => (
-              <path
-                key={i}
-                d={d}
-                fill="none"
-                stroke="var(--color-accent-soft)"
-                strokeWidth="1"
-                opacity="0.5"
-              />
-            ))}
-            {circuitDots.map((dot, i) => (
-              <motion.circle
-                key={i}
-                cx={dot.cx}
-                cy={dot.cy}
-                r={dot.r}
-                fill="var(--color-signal)"
-                animate={reduceMotion ? undefined : { opacity: [0.4, 1, 0.4] }}
-                transition={{ duration: 2.6, repeat: Infinity, delay: dot.delay, ease: "easeInOut" }}
-              />
-            ))}
-            <motion.circle
-              cx="120"
-              cy="105"
-              r="30"
-              fill="url(#coreGlow)"
-              animate={reduceMotion ? undefined : { scale: [1, 1.15, 1], opacity: [0.6, 0.9, 0.6] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </g>
+            <div className="grid grid-cols-2 gap-2">
+              <div className="rounded-lg bg-gradient-to-br from-accent to-accent-soft p-3">
+                <span className="text-[9px] text-paper/80">Revenue</span>
+                <div className="mt-1 flex items-baseline gap-1">
+                  <span className="font-display text-base font-semibold text-paper">$84.2k</span>
+                  <span className="flex items-center text-[9px] text-signal">
+                    <TrendingUp size={9} />
+                    18%
+                  </span>
+                </div>
+              </div>
+              <div className="rounded-lg border border-line bg-ink-elevated p-3">
+                <span className="text-[9px] text-paper-dim">Active users</span>
+                <p className="mt-1 font-display text-base font-semibold text-paper">12,904</p>
+              </div>
+            </div>
 
-          {/* profile outline on top for crispness */}
-          <path d={profilePath} fill="none" stroke="var(--color-accent-soft)" strokeWidth="1.5" opacity="0.8" />
-        </svg>
-      </motion.div>
+            <div className="rounded-lg border border-line bg-ink-elevated p-3">
+              <span className="text-[9px] text-paper-dim">Growth this quarter</span>
+              <div className="mt-2 flex h-14 items-end gap-1">
+                {bars.map((h, i) => (
+                  <motion.div
+                    key={i}
+                    className="flex-1 rounded-t bg-gradient-to-t from-accent to-signal"
+                    style={{ height: `${h}%` }}
+                    animate={reduceMotion ? undefined : { opacity: [0.6, 1, 0.6] }}
+                    transition={{ duration: 2.4, repeat: Infinity, delay: i * 0.15, ease: "easeInOut" }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-1.5">
+              <div className="h-2 w-full rounded-full bg-ink-elevated" />
+              <div className="h-2 w-2/3 rounded-full bg-ink-elevated" />
+            </div>
+          </div>
+        </div>
+
+        {/* laptop base */}
+        <div className="mx-auto -mt-1 h-3 w-[92%] rounded-b-2xl bg-gradient-to-b from-ink-elevated to-ink-soft" />
+        <div className="mx-auto h-1 w-1/3 rounded-b-xl bg-ink-soft" />
+      </div>
+
+      {badges.map(({ icon: Icon, label, top, left, delay }) => (
+        <motion.div
+          key={label}
+          className="absolute flex items-center gap-2 rounded-xl border border-line bg-ink-elevated/90 px-3 py-2 text-xs font-medium text-paper shadow-lg shadow-black/30 backdrop-blur"
+          style={{ top, left }}
+          animate={reduceMotion ? undefined : { y: [0, -10, 0] }}
+          transition={{ duration: 4.5, repeat: Infinity, delay, ease: "easeInOut" }}
+        >
+          <Icon size={14} className="text-accent-soft" />
+          {label}
+        </motion.div>
+      ))}
     </div>
   );
 }
