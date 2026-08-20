@@ -4,6 +4,8 @@ import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/fade-in";
+import { Stagger, StaggerItem } from "@/components/stagger";
+import { HoverLift } from "@/components/hover-lift";
 import { ServiceIcon } from "@/components/service-icon";
 import { services } from "@/lib/services";
 
@@ -26,27 +28,29 @@ export default function ServicesPage() {
         </p>
       </FadeIn>
 
-      <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2">
-        {services.map((service, i) => (
-          <FadeIn key={service.slug} delay={i * 0.05}>
-            <Link
-              href={`/services/${service.slug}`}
-              className="group flex h-full flex-col rounded-2xl border border-line p-8 transition-colors hover:border-accent-soft"
-            >
-              <ServiceIcon icon={service.icon} size={24} className="text-accent-soft" />
-              <h2 className="mt-5 font-display text-xl font-semibold text-paper">
-                {service.name}
-              </h2>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-paper-dim">
-                {service.summary}
-              </p>
-              <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-paper">
-                Explore <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
-              </span>
-            </Link>
-          </FadeIn>
+      <Stagger className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2">
+        {services.map((service) => (
+          <StaggerItem key={service.slug}>
+            <HoverLift className="h-full rounded-2xl border border-line transition-colors hover:border-accent-soft">
+              <Link
+                href={`/services/${service.slug}`}
+                className="group flex h-full flex-col p-8"
+              >
+                <ServiceIcon icon={service.icon} size={24} className="text-accent-soft" />
+                <h2 className="mt-5 font-display text-xl font-semibold text-paper">
+                  {service.name}
+                </h2>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-paper-dim">
+                  {service.summary}
+                </p>
+                <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-paper">
+                  Explore <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
+            </HoverLift>
+          </StaggerItem>
         ))}
-      </div>
+      </Stagger>
 
       <FadeIn>
         <div className="mt-16 flex flex-col items-start gap-6 rounded-2xl border border-line bg-ink-soft p-10 sm:flex-row sm:items-center sm:justify-between">

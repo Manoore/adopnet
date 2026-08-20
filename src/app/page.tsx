@@ -3,49 +3,17 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/fade-in";
+import { Stagger, StaggerItem } from "@/components/stagger";
+import { HoverLift } from "@/components/hover-lift";
+import { Hero } from "@/components/hero";
 import { ServiceIcon } from "@/components/service-icon";
 import { services } from "@/lib/services";
 import { packages } from "@/lib/packages";
-import { siteConfig } from "@/lib/site-config";
 
 export default function Home() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 -top-40 h-[560px] bg-[radial-gradient(ellipse_at_top,_var(--color-accent)_0%,_transparent_60%)] opacity-20"
-        />
-        <Container className="relative pt-24 pb-20 sm:pt-32 sm:pb-28">
-          <FadeIn>
-            <div className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-1.5 text-xs text-paper-dim">
-              <Sparkles size={14} className="text-signal" />
-              Built for US companies moving fast on AI
-            </div>
-          </FadeIn>
-          <FadeIn delay={0.05}>
-            <h1 className="mt-8 max-w-3xl text-balance font-display text-5xl font-semibold leading-[1.05] tracking-tight text-paper sm:text-6xl lg:text-7xl">
-              Marketing, AI, and product — built by one studio.
-            </h1>
-          </FadeIn>
-          <FadeIn delay={0.1}>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-paper-dim">
-              {siteConfig.description}
-            </p>
-          </FadeIn>
-          <FadeIn delay={0.15}>
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <Button href="/packages" size="lg">
-                See packages <ArrowRight size={16} />
-              </Button>
-              <Button href="/contact" variant="secondary" size="lg">
-                Talk to us
-              </Button>
-            </div>
-          </FadeIn>
-        </Container>
-      </section>
+      <Hero />
 
       {/* Service pillars */}
       <section className="border-t border-line">
@@ -60,25 +28,27 @@ export default function Home() {
             </p>
           </FadeIn>
 
-          <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service, i) => (
-              <FadeIn key={service.slug} delay={i * 0.05}>
-                <Link
-                  href={`/services/${service.slug}`}
-                  className="group block h-full bg-ink p-8 transition-colors hover:bg-ink-soft"
-                >
-                  <ServiceIcon icon={service.icon} size={22} className="text-accent-soft" />
-                  <h3 className="mt-5 font-display text-lg font-semibold text-paper">
-                    {service.name}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-paper-dim">{service.summary}</p>
-                  <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-paper opacity-0 transition-opacity group-hover:opacity-100">
-                    Learn more <ArrowRight size={14} />
-                  </span>
-                </Link>
-              </FadeIn>
+          <Stagger className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((service) => (
+              <StaggerItem key={service.slug}>
+                <HoverLift className="h-full">
+                  <Link
+                    href={`/services/${service.slug}`}
+                    className="group block h-full bg-ink p-8 transition-colors hover:bg-ink-soft"
+                  >
+                    <ServiceIcon icon={service.icon} size={22} className="text-accent-soft" />
+                    <h3 className="mt-5 font-display text-lg font-semibold text-paper">
+                      {service.name}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-paper-dim">{service.summary}</p>
+                    <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-paper opacity-0 transition-opacity group-hover:opacity-100">
+                      Learn more <ArrowRight size={14} />
+                    </span>
+                  </Link>
+                </HoverLift>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </Container>
       </section>
 
@@ -146,12 +116,13 @@ export default function Home() {
             </div>
           </FadeIn>
 
-          <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-3">
+          <Stagger className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-3">
             {packages
               .filter((pkg) => pkg.selfServe)
-              .map((pkg, i) => (
-                <FadeIn key={pkg.slug} delay={i * 0.05}>
-                  <div
+              .map((pkg) => (
+                <StaggerItem key={pkg.slug}>
+                  <HoverLift
+                    glow
                     className={`h-full rounded-2xl border p-8 ${
                       pkg.highlight ? "border-accent-soft bg-ink-soft" : "border-line"
                     }`}
@@ -167,10 +138,10 @@ export default function Home() {
                     <Button href={`/packages#${pkg.slug}`} variant="secondary" className="mt-6 w-full">
                       Details
                     </Button>
-                  </div>
-                </FadeIn>
+                  </HoverLift>
+                </StaggerItem>
               ))}
-          </div>
+          </Stagger>
         </Container>
       </section>
 

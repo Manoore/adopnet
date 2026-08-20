@@ -3,6 +3,8 @@ import { Check } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/fade-in";
+import { Stagger, StaggerItem } from "@/components/stagger";
+import { HoverLift } from "@/components/hover-lift";
 import { packages } from "@/lib/packages";
 
 export const metadata: Metadata = {
@@ -24,11 +26,12 @@ export default function PackagesPage() {
         </p>
       </FadeIn>
 
-      <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-4">
-        {packages.map((pkg, i) => (
-          <FadeIn key={pkg.slug} delay={i * 0.05}>
-            <div
+      <Stagger className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-4">
+        {packages.map((pkg) => (
+          <StaggerItem key={pkg.slug}>
+            <HoverLift
               id={pkg.slug}
+              glow
               className={`flex h-full scroll-mt-28 flex-col rounded-2xl border p-8 ${
                 pkg.highlight ? "border-accent-soft bg-ink-soft" : "border-line"
               }`}
@@ -66,10 +69,10 @@ export default function PackagesPage() {
               >
                 {pkg.selfServe ? `Get ${pkg.name}` : "Request a quote"}
               </Button>
-            </div>
-          </FadeIn>
+            </HoverLift>
+          </StaggerItem>
         ))}
-      </div>
+      </Stagger>
 
       <FadeIn>
         <p className="mt-10 text-center text-xs text-paper-dim">
