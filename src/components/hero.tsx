@@ -1,14 +1,38 @@
 "use client";
 
 import { useRef } from "react";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, Zap, Target, BrainCircuit, ShieldCheck } from "lucide-react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/fade-in";
+import { Stagger, StaggerItem } from "@/components/stagger";
 import { HeroHeadline } from "@/components/hero-headline";
 import { Magnetic } from "@/components/magnetic";
 import { siteConfig } from "@/lib/site-config";
+
+const trustPoints = [
+  {
+    icon: Zap,
+    title: "Fast delivery",
+    body: "Fixed-scope packages ship in weeks, priced before you start.",
+  },
+  {
+    icon: Target,
+    title: "Senior-led",
+    body: "Every engagement run by specialists who've shipped it before.",
+  },
+  {
+    icon: BrainCircuit,
+    title: "Applied AI",
+    body: "The AI features we sell are the same ones running this site.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Secure & reliable",
+    body: "Modern infrastructure and security practices built in from day one.",
+  },
+];
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -58,6 +82,18 @@ export function Hero() {
             </Button>
           </div>
         </FadeIn>
+
+        <Stagger className="mt-16 grid grid-cols-1 divide-y divide-line rounded-2xl border border-line sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
+          {trustPoints.map((point) => (
+            <StaggerItem key={point.title}>
+              <div className="flex h-full flex-col gap-2 p-6">
+                <point.icon size={18} className="text-accent-soft" />
+                <h3 className="font-display text-sm font-semibold text-paper">{point.title}</h3>
+                <p className="text-xs leading-relaxed text-paper-dim">{point.body}</p>
+              </div>
+            </StaggerItem>
+          ))}
+        </Stagger>
       </Container>
     </section>
   );

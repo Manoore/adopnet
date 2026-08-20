@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/fade-in";
 import { Stagger, StaggerItem } from "@/components/stagger";
 import { HoverLift } from "@/components/hover-lift";
-import { ServiceIcon } from "@/components/service-icon";
+import { IconBadge } from "@/components/icon-badge";
 import { services } from "@/lib/services";
 
 export const metadata: Metadata = {
@@ -19,7 +19,10 @@ export default function ServicesPage() {
   return (
     <Container className="py-24">
       <FadeIn>
-        <h1 className="max-w-2xl font-display text-4xl font-semibold tracking-tight text-paper sm:text-5xl">
+        <span className="text-xs font-medium uppercase tracking-widest text-accent-soft">
+          What We Do
+        </span>
+        <h1 className="mt-3 max-w-2xl font-display text-4xl font-semibold tracking-tight text-paper sm:text-5xl">
           Everything it takes to build and grow, in one place.
         </h1>
         <p className="mt-5 max-w-xl text-paper-dim">
@@ -29,14 +32,14 @@ export default function ServicesPage() {
       </FadeIn>
 
       <Stagger className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2">
-        {services.map((service) => (
+        {services.map((service, i) => (
           <StaggerItem key={service.slug}>
             <HoverLift className="h-full rounded-2xl border border-line transition-colors hover:border-accent-soft">
               <Link
                 href={`/services/${service.slug}`}
                 className="group flex h-full flex-col p-8"
               >
-                <ServiceIcon icon={service.icon} size={24} className="text-accent-soft" />
+                <IconBadge icon={service.icon} index={i} />
                 <h2 className="mt-5 font-display text-xl font-semibold text-paper">
                   {service.name}
                 </h2>

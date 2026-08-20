@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
@@ -10,6 +11,7 @@ import { Logo } from "@/components/logo";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-ink/80 backdrop-blur-md">
@@ -25,15 +27,22 @@ export function SiteHeader() {
           </Link>
 
           <nav className="hidden items-center gap-8 md:flex">
-            {siteConfig.nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-sm text-paper-dim transition-colors hover:text-paper"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {siteConfig.nav.map((item) => {
+              const active = pathname.startsWith(item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`border-b-2 pb-1.5 text-sm transition-colors ${
+                    active
+                      ? "border-signal text-paper"
+                      : "border-transparent text-paper-dim hover:text-paper"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="hidden md:block">

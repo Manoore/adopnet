@@ -6,7 +6,7 @@ import { FadeIn } from "@/components/fade-in";
 import { Stagger, StaggerItem } from "@/components/stagger";
 import { HoverLift } from "@/components/hover-lift";
 import { Hero } from "@/components/hero";
-import { ServiceIcon } from "@/components/service-icon";
+import { IconBadge } from "@/components/icon-badge";
 import { services } from "@/lib/services";
 import { packages } from "@/lib/packages";
 
@@ -19,7 +19,10 @@ export default function Home() {
       <section className="border-t border-line">
         <Container className="py-24">
           <FadeIn>
-            <h2 className="font-display text-3xl font-semibold tracking-tight text-paper sm:text-4xl">
+            <span className="text-xs font-medium uppercase tracking-widest text-accent-soft">
+              Our Services
+            </span>
+            <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-paper sm:text-4xl">
               Six disciplines. One accountable team.
             </h2>
             <p className="mt-4 max-w-2xl text-paper-dim">
@@ -29,14 +32,14 @@ export default function Home() {
           </FadeIn>
 
           <Stagger className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
+            {services.map((service, i) => (
               <StaggerItem key={service.slug}>
                 <HoverLift className="h-full">
                   <Link
                     href={`/services/${service.slug}`}
                     className="group block h-full bg-ink p-8 transition-colors hover:bg-ink-soft"
                   >
-                    <ServiceIcon icon={service.icon} size={22} className="text-accent-soft" />
+                    <IconBadge icon={service.icon} index={i} />
                     <h3 className="mt-5 font-display text-lg font-semibold text-paper">
                       {service.name}
                     </h3>
@@ -147,18 +150,30 @@ export default function Home() {
 
       {/* Closing CTA */}
       <section className="border-t border-line">
-        <Container className="py-24 text-center">
+        <Container className="py-24">
           <FadeIn>
-            <h2 className="mx-auto max-w-2xl text-balance font-display text-3xl font-semibold tracking-tight text-paper sm:text-4xl">
-              Tell us what you&apos;re trying to build. We&apos;ll tell you what it takes.
-            </h2>
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-              <Button href="/contact" size="lg">
-                Start a project <ArrowRight size={16} />
-              </Button>
-              <Button href="/services" variant="secondary" size="lg">
-                Explore services
-              </Button>
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-accent via-accent to-ink-soft p-10 text-center sm:p-16">
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--color-signal)_0%,_transparent_50%)] opacity-25"
+              />
+              <div className="relative">
+                <h2 className="mx-auto max-w-2xl text-balance font-display text-3xl font-semibold tracking-tight text-paper sm:text-4xl">
+                  Tell us what you&apos;re trying to build. We&apos;ll tell you what it takes.
+                </h2>
+                <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+                  <Button href="/contact" variant="primary" size="lg">
+                    Start a project <ArrowRight size={16} />
+                  </Button>
+                  <Button
+                    href="/services"
+                    size="lg"
+                    className="border border-paper/30 bg-transparent text-paper hover:bg-paper/10"
+                  >
+                    Explore services
+                  </Button>
+                </div>
+              </div>
             </div>
           </FadeIn>
         </Container>
